@@ -1,6 +1,5 @@
 package com.example.cs.groupassignment2;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,19 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.cs.groupassignment2.models.Item;
 import com.example.cs.groupassignment2.models.order;
-import com.example.cs.groupassignment2.models.summary;
-
-import java.util.List;
 
 
 public class MainActivity3 extends AppCompatActivity {
 
     order order = new order ();
-   /// summary summary = new summary();
     Item item = new Item();
     Spinner availableColorsSpinner;
     Spinner availableSizesSpinner;

@@ -12,12 +12,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.cs.groupassignment2.models.order;
-import com.example.cs.groupassignment2.models.summary;
 
 public class MainActivity4 extends AppCompatActivity {
 
 //    order order = new order();
-//    summary summary = new summary();
     TextView total;
     TextView taxtotal;
     @Override
