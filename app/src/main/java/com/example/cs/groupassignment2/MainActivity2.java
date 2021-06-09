@@ -121,7 +121,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         Intent intent = new Intent(this,MainActivity3.class);
         intent.putExtra("DATA2", new order (item,selectedColor,size,quantity));
-
+        Toast.makeText(this, "The order added successfully to the shopping cart", Toast.LENGTH_SHORT).show();
 
     }
 

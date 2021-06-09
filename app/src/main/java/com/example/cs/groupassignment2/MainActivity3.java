@@ -10,7 +10,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.NumberPicker;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.cs.groupassignment2.models.Item;
 import com.example.cs.groupassignment2.models.order;
+import com.example.cs.groupassignment2.models.summary;
 
 import java.util.List;
 
@@ -18,6 +24,11 @@ import java.util.List;
 public class MainActivity3 extends AppCompatActivity {
 
     order order = new order ();
+   /// summary summary = new summary();
+    Item item = new Item();
+    Spinner availableColorsSpinner;
+    Spinner availableSizesSpinner;
+    NumberPicker quantityPicker ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,18 +94,53 @@ public class MainActivity3 extends AppCompatActivity {
 
 
     public void check_OnClick(View view) {
+//        String[] names = new String[order.getOrders().size()];
+//        int  quantities =  order.getOrders().size();
+//
+//        for(int i = 0; i<names.length;i++) {
+//            names[i] = order.getOrders().get(i).getItem().getName();
+//            quantities = order.getOrders().get(i).getChosenQuantity();
+//        }
+//        order.orders.add(new order (item,quantities));
+////        System.out.println("quantityyyyyyyyyyy"+quantities);
+////        System.out.println("itemmmmmm "+item);
+
         String[] names = new String[order.getOrders().size()];
-
+        int[] ids = new int[order.getOrders().size()];
         int[] prices = new int[order.getOrders().size()];
+        String [] colors = new String [order.getOrders().size()];
+        int [] sizes = new int [order.getOrders().size()];
+        int [] quantities = new int [order.getOrders().size()];
 
-        for(int i = 0; i<names.length;i++) {
-         prices[i] = order.getOrders().get(i).getItem().getPrice();
+        for(int i = 0; i<names.length;i++){
+            names[i] = order.getOrders().get(i).getItem().getName();
+            ids[i] = order.getOrders().get(i).getItem().getImageID();
+            prices[i] = order.getOrders().get(i).getItem().getPrice();
+            colors [i] = order.getOrders().get(i).getChosenColor();
+            sizes[i] = order.getOrders().get(i).getChosenSize();
+            quantities[i]=order.getOrders().get(i).getChosenQuantity();
+
         }
-        order.CalculateTotal(prices);
-        Intent intent = new Intent(this, MainActivity4.class);
+
+        String selectedColor = availableColorsSpinner.getSelectedItem().toString();
+        String selectedSize = availableSizesSpinner.getSelectedItem().toString();
+        int size = Integer.parseInt(selectedSize);
+        int quantity = quantityPicker.getValue();
+
+        System.out.println(selectedColor);
+        System.out.println(size);
+        System.out.println(quantity);
+
+        order.orders.add(new order (item,selectedColor,size,quantity));
+
+        Intent intent = new Intent(this,MainActivity4.class);
+        intent.putExtra("DATA3", new order (item,selectedColor,size,quantity));
+//        Toast.makeText(this, "The order added successfully to the shopping cart", Toast.LENGTH_SHORT).show();
+
+//        Intent intent = new Intent(this, MainActivity4.class);
+//        intent.putExtra("DATA3", new order (item,quantities));
         startActivity(intent);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -25,6 +25,11 @@ public class order implements Serializable {
         this.chosenQuantity = chosenQuantity;
     }
 
+    public order(Item item, int chosenQuantity) {
+        this.item = item;
+        this.chosenQuantity = chosenQuantity;
+    }
+
     public Item getItem() {
         return item;
     }
