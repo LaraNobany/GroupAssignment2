@@ -9,7 +9,9 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.cs.groupassignment2.models.order;
+
 
 public class CaptionedImagesAdapter3
         extends RecyclerView.Adapter<CaptionedImagesAdapter3.ViewHolder>  {
@@ -17,25 +19,22 @@ public class CaptionedImagesAdapter3
     private String[] names;
     private int[] imageIds;
     private int[] prices;
-    String [] colors;
-    private int[] sizes;
     private int[] quantities;
     private Context mContext;
 
 
-    public CaptionedImagesAdapter3( Context mContext,String[] names, int[] imageIds,int[] prices, String[] colors, int[] quantities, int[] sizes) {
+
+    public CaptionedImagesAdapter3( Context mContext,String[] names, int[] imageIds,int[] prices,  int[] quantities) {
         this.names = names;
         this.imageIds = imageIds;
         this.prices = prices;
-        this.colors = colors;
         this.quantities = quantities;
-        this.sizes = sizes;
         this.mContext = mContext;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.summary,
+        CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.summary_cart,
                 parent,
                 false);
 
@@ -53,9 +52,9 @@ public class CaptionedImagesAdapter3
             }
         }
 
-        ImageView imageView = (ImageView) cardView.findViewById(R.id.image);
-        Drawable dr = ContextCompat.getDrawable(cardView.getContext(), order.getItem().getImageID());
-        imageView.setImageDrawable(dr);
+//        ImageView imageView = (ImageView) cardView.findViewById(R.id.image);
+//        Drawable dr = ContextCompat.getDrawable(cardView.getContext(), order.getItem().getImageID());
+//        imageView.setImageDrawable(dr);
 
         TextView txtName = (TextView)cardView.findViewById(R.id.txtName);
         txtName.setText( order.getItem().getName());
@@ -63,11 +62,6 @@ public class CaptionedImagesAdapter3
         TextView txtPrice = (TextView)cardView.findViewById(R.id.txtPrice);
         txtPrice.setText( "Price : "+order.getItem().getPrice());
 
-        TextView txtColor = (TextView)cardView.findViewById(R.id.txtColor);
-        txtColor.setText("Color : "+colors[position] );
-
-        TextView txtSize = (TextView)cardView.findViewById(R.id.txtSize);
-        txtSize.setText("Size : "+sizes[position] );
 
         TextView txtQuantity = (TextView)cardView.findViewById(R.id.txtQuantity);
         txtQuantity.setText("Quantity : "+quantities[position] );

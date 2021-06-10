@@ -5,10 +5,14 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
-
-        <item name="android:textSize">19sp</item>
+        <item name="android:fontFamily">@font/philosopher</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:padding">7sp</item>
         <item name="android:layout_margin">10sp</item>
+        <item name="android:background">#C9231D1D</item>
+        <item name="android:textColor">@color/white</item>
+
     </style>
 
     <style name="text_style">

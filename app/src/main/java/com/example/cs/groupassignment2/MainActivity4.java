@@ -1,6 +1,7 @@
 package com.example.cs.groupassignment2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,43 +10,66 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Collections;
 
 import com.example.cs.groupassignment2.models.order;
 
-public class MainActivity4 extends AppCompatActivity {
+import static com.example.cs.groupassignment2.models.order.totalwithtax;
 
-//    order order = new order();
+
+public class MainActivity4 extends AppCompatActivity {
     TextView total;
     TextView taxtotal;
+    TextView tax;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
-//        total = findViewById(R.id.total);
-//        taxtotal = findViewById(R.id.taxtotal);
-//
+
+
         RecyclerView recycler = findViewById(R.id.summary_recycler);
 
         String[] names = new String[order.getOrders().size()];
         int[] ids = new int[order.getOrders().size()];
         int[] prices = new int[order.getOrders().size()];
-        String [] colors = new String [order.getOrders().size()];
-        int [] sizes = new int [order.getOrders().size()];
         int [] quantities = new int [order.getOrders().size()];
 
         for(int i = 0; i<names.length;i++){
             names[i] = order.getOrders().get(i).getItem().getName();
             ids[i] = order.getOrders().get(i).getItem().getImageID();
             prices[i] = order.getOrders().get(i).getItem().getPrice();
-            colors [i] = order.getOrders().get(i).getChosenColor();
-            sizes[i] = order.getOrders().get(i).getChosenSize();
             quantities[i]=order.getOrders().get(i).getChosenQuantity();
 
         }
         recycler.setLayoutManager(new LinearLayoutManager(this));
-        CaptionedImagesAdapter3 adapter = new CaptionedImagesAdapter3(this,names, ids,prices,colors,quantities,sizes);
+        CaptionedImagesAdapter3 adapter = new CaptionedImagesAdapter3(this,names, ids,prices,quantities);
         recycler.setAdapter(adapter);
+
+
+
+        total = findViewById(R.id.total);
+        tax = findViewById(R.id.tax);
+        taxtotal = findViewById(R.id.taxtotal);
+
+
+        total.setText(""+total.getText()+order.CalculateTotal() + " $");
+
+        tax.setText(""+tax.getText()+order.tax()+ " $");
+
+        DecimalFormat df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.CEILING);
+        taxtotal.setText(""+taxtotal.getText()+df.format(order.totalwithtax())+ " $");
+
 
     }
 
@@ -66,4 +90,10 @@ public class MainActivity4 extends AppCompatActivity {
     }
 
 
+    public void buyOnClick(View view) {
+        Toast.makeText(this, "Purchase completed successfully", Toast.LENGTH_SHORT).show();
+        finishAffinity();
+        System.exit(0);
+
+    }
 }

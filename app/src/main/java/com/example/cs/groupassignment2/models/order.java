@@ -3,7 +3,6 @@ package com.example.cs.groupassignment2.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import com.example.cs.groupassignment2.R;
 
@@ -22,11 +21,6 @@ public class order implements Serializable {
         this.item = item;
         this.chosenColor = chosenColor;
         this.chosenSize = chosenSize;
-        this.chosenQuantity = chosenQuantity;
-    }
-
-    public order(Item item, int chosenQuantity) {
-        this.item = item;
         this.chosenQuantity = chosenQuantity;
     }
 
@@ -76,27 +70,26 @@ public class order implements Serializable {
                 '}';
     }
 
-
-    public int CalculateTotal(List<order> items) {
-        int totalPrice = 0;
-        for (int i = 0; i < items.size(); i++) {
-            totalPrice += items.get(i).item.getPrice();
+    public static double CalculateTotal() {
+        double totalPrice = 0;
+        for (int i = 0; i < orders.size(); i++) {
+            totalPrice += orders.get(i).item.getPrice() * (orders.get(i).chosenQuantity);
         }
         return totalPrice;
     }
 
-    public double tax(List<order>item){
-        double x = CalculateTotal((List<order>) item);
-        double total =0;
-        total = x * (14/100);
-        return total;
+    public static double tax(){
+        double total = CalculateTotal();
+        double tax ;
+        tax = total * (0.14);
+        return tax;
     }
 
-    public double totalwithtax(List<order> item){
-        double x = CalculateTotal(item);
-        double y = tax(item);
-        double t = x + y;
-        return t;
+    public static double totalwithtax(){
+        double total = CalculateTotal();
+        double tax = tax();
+        double totalTax = total + tax;
+        return totalTax;
     }
 
 }
